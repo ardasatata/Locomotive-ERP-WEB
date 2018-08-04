@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+    <script src="test_ui.js"></script>
+</head>
+<body onload="load()">
+<div class="ui text container" style="padding: 2em">
+    <form class="ui form">
+        <div class="field">
+            <label>Project Name</label>
+            <input type="text" name="first-name" placeholder="First Name">
+        </div>
+        <div class="field">
+            <label>Description</label>
+            <textarea rows="3"></textarea>
+        </div>
+        <div class="field">
+            <label>Gender</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="gender">
+                <i class="dropdown icon"></i>
+                <div class="default text">Gender</div>
+                <div class="menu">
+                    <div class="item" data-value="1">Male</div>
+                    <div class="item" data-value="0">Female</div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui checkbox">
+                <input type="checkbox" tabindex="0" class="hidden">
+                <label>I agree to the Terms and Conditions</label>
+            </div>
+        </div>
+        <button class="ui button" type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
