@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Project Locomotive</title>
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body onload="Load()">
+    <div class="container">
+
+      <div class="jumbotron">
+        <h3>Add New Project</h3>
+        <form id="projectInputForm">
+          <div class="form-group">
+            <label for="projectDescInput">Description</label>
+            <input type="text" class="form-control" id="projectDescInput" placeholder="Describe the project ...">
+          </div>
+          <div class="form-group">
+            <label for="projectDescInput">Status</label>
+             <select class="form-control" id="projectStatusInput">
+              <option value="Belum Take">Belum Take</option>
+              <option value="Wrap">Wrap</option>
+              <option value="Editing">Editing</option>
+              <option value="Revisi">Revisi</option>
+              <option value="Done">Done</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="projectDescInput">Team</label>
+            <div class="checkbox">
+              <label><input type="checkbox" value="Arda">Arda</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="Arman">Arman</label>
+            </div>
+            <div class="checkbox">
+              <label><input type="checkbox" value="Satria">Satria</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="projectDescInput">Budget</label>
+            <input type="text" class="form-control" id="projectBudgetInput" placeholder="Enter budget ammount ...">
+          </div>
+          <button type="submit" class="btn btn-primary">Add Project</button>
+        </form>
+      </div>
+
+      <div id="projectInfo">
+      </div>
+
+      <div id="budgetInfo">
+        <div id="projectBudget">
+        </div>
+      </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+    apiKey: "AIzaSyB-Pa3WVucPY73d84EfTWJIV3y9uwh-Fi8",
+    authDomain: "loco-projecttracker.firebaseapp.com",
+    databaseURL: "https://loco-projecttracker.firebaseio.com",
+    projectId: "loco-projecttracker",
+    storageBucket: "loco-projecttracker.appspot.com",
+    messagingSenderId: "463924943381"
+  };
+  firebase.initializeApp(config);
+</script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://chancejs.com/chance.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
+    <script src="project.js"></script>
+    <script src="budget.js"></script>
+  </body>
+</html>
