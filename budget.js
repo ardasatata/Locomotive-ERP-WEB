@@ -1,7 +1,8 @@
 var database = firebase.database();
 var projectId = getURLParameter('id');
+var budgetsRef = firebase.database().ref("budgets/"+projectId);
 
-document.getElementById('projectAddExpense').addEventListener('submit', saveProject);
+document.getElementById('projectAddExpense').addEventListener('submit', saveExpense);
 
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
@@ -10,9 +11,9 @@ function getURLParameter(name) {
 
 function fetchBudgetData(){
     var budgetExpense = document.getElementById('pExpense');
-    console.log(projectId);
-    var pExpense = sumPengeluaran(projectId);
-    console.log(pExpense);
+    //console.log(projectId);
+    //var pExpense = sumPengeluaran(projectId);
+    //console.log(pExpense);
     //budgetExpense.innerHTML = pExpense;
 
     var pBudgetBody = document.getElementById('pBudgetBody');
@@ -36,7 +37,7 @@ function fetchBudgetData(){
               amount: childSnapshot.val().amount
           }
 
-          console.log(budget);
+          //console.log(budget);
           budgets.push(budget);
       })
     }).then(()=>{
@@ -46,15 +47,19 @@ function fetchBudgetData(){
             var desc = budgets[i].description;
             var amount = budgets[i].amount;
 
-            console.log("loaded"+i+budgets[i]);
+            //console.log("loaded"+i+budgets[i].id);
+
+            var budgetId = "\"removeBudget(\'"+idBudget+"\')\"";
+
+            //console.log(budgetId);
 
             pBudgetBody.innerHTML +=
                 '<tr>'+
                 '<td>'+(i+1)+'</td>'+
                 '<td>'+desc+'</td>'+
-                '<td>'+amount+'</td>'+
+                '<td style="text-align: right">'+amount+'</td>'+
                 '<td class="selectable negative">'+
-                '<a onclick="removeBudget("'+'+idBudget+'+'")">Delete</a>'+
+                '<a onclick='+budgetId+'>Delete</a>'+
                 '</td>'+
                 '</tr>';
         }
@@ -68,7 +73,13 @@ function createBudget(){
 }
 
 function saveExpense(e){
+    var pExpense = parseInt(document.getElementById("pInputExpense").value);
+    var pExpenseDesc = document.getElementById("pInputExpenseDesc").value;
 
+    addExpense(pExpense,pExpenseDesc);
+
+    console.log(pExpense+" "+pExpenseDesc);
+    e.preventDefault();
 }
 
 function addExpense(amount,desc){
@@ -94,9 +105,8 @@ function addExpense(amount,desc){
 
 function removeBudget(idBudget){ //remove budget component jangan lupa pake ""
   var query = firebase.database().ref("budgets/"+projectId+"/"+idBudget);
-  query.remove();
 
-  console.log(query);
+    query.remove();
   //console.log("budget removed");
   fetchBudgetData();
 }
@@ -125,7 +135,7 @@ function sumPengeluaran(idProject){
     snapshot.forEach(function(childSnapshot){
       var key = childSnapshot.key;
       var childData = childSnapshot.val();
-      console.log(key+" "+childData.amount);
+      //console.log(key+" "+childData.amount);
 
       sum += childData.amount;
     })

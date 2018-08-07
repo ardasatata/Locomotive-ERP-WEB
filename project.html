@@ -49,16 +49,16 @@
 
   <div class="ui text container" style="padding: 2em">
       <h1>Project Budget</h1>
-      <form class="ui form" id="projectAddExpense">
+      <form class="ui form" id="projectAddExpense" >
           <div class="field">
               <label>Pengeluaran</label>
-              <input type="text" name="first-name" placeholder="Expense">
+              <input type="text" placeholder="Masukan nominal pengeluaran" id="pInputExpense">
           </div>
           <div class="field">
               <label>Deskripsi Pengeluaran</label>
-              <textarea rows="3"></textarea>
+              <textarea rows="3" id="pInputExpenseDesc"></textarea>
           </div>
-          <button class="ui button" type="submit">Tambah Pengeluaran</button>
+          <button type="submit" class="ui button" >Tambah Pengeluaran</button>
       </form>
   </div>
 
@@ -68,7 +68,7 @@
           <tr>
               <th>No</th>
               <th>Expense Desc</th>
-              <th>Amount</th>
+              <th style="text-align: center">Amount</th>
               <th></th>
           </tr>
           </thead>
