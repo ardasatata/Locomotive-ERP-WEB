@@ -2,6 +2,13 @@
 
 var database = firebase.database();
 
+function projectTableLoading(){
+    var projectTable = document.getElementById("projectLoader");
+    var currentClass = projectTable.className;
+
+    projectTable.className = "ui inverted dimmer";
+}
+
 function fetchProjects () {
 
   var projectsList = document.getElementById('tBody_projectList');
@@ -50,6 +57,8 @@ function fetchProjects () {
                       '</td>'+
                   '</tr>';
         }
+
+        projectTableLoading();
     });
 
   projectsList.innerHTML = '';

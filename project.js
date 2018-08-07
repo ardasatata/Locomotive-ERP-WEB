@@ -7,18 +7,19 @@ function getURLParameter(name) {
 
 function Load(){
   fetchProjectData(getURLParameter('id'));
+  fetchBudgetData();
 }
 
 //function edit
 
 function fetchProjectData(id){
-  var projectInfo = document.getElementById('projectInfo');
+  var projectInfo = document.getElementById('projectPageContent');
   console.log(id);
   projectInfo.innerHTML = '';
 
   var query = database.ref('projects/'+id);
 
-  var id_,desc,status,budget;
+  var id_,desc,status,budget,pengeluaran;
 
   query.once('value').then(function(snapshot) {
 
@@ -27,20 +28,17 @@ function fetchProjectData(id){
     status = snapshot.val().status;
     //var team = projects[i].team;
     budget = snapshot.val().budget;
+    pengeluaran = sumPengeluaran(id_);
 
   console.log(snapshot.val().budget);
   }).then(()=>{
-  projectInfo.innerHTML = '<div class="well">'+
-                            '<h6>Project ID: ' + id + '</h6>'+
-                            '<p><span class="label label-info">' + status + '</span></p>'+
-                            '<h3>Project Name : ' + desc + '</h3>'+
-                            '<p>' +
-                            '<span class="glyphicon glyphicon-user"></span> Team : ' + '</p>'+
-                            '<span class="glyphicon glyphicon-usd"></span> Budget : ' + budget + '</p>'+
-                            '<a href="#" class="btn btn-success" onclick="setStatusDone(\''+id+'\')">Done</a> '+
-                            '<a href="#" class="btn btn-danger" onclick="deleteProject(\''+id+'\')">Delete</a> '+
-                            '<a href="/project.html?id='+id+'" class="btn btn-danger" >Edit</a>'+
-                            '</div>';
+  projectInfo.innerHTML ='<div>Project ID : '+id_+' </div>'+
+                            '<div>Description : '+desc+' </div>'+
+                            '<div>Start Date : date_placeholder </div>'+
+                            '<div>End Date : - </div>'+
+                            '<div>Budget : '+budget+' </div>'+
+                            '<div id="pExpense">Expense : '+pengeluaran+' </div>'+
+                            '<div id="pSisa">Sisa : - </div>'
                           }
                         );
 }

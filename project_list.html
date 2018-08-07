@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Project List</title>
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <script
             src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -11,8 +11,8 @@
     <script src="semantic/dist/semantic.min.js"></script>
 </head>
 <body onload="fetchProjects()">
-  <div class="ui secondary pointing menu">
-      <a class="active item">
+  <div class="ui secondary pointing menu" id="navbarUtama">
+      <a class="active item" onclick="location.href = '/'">
           Home
       </a>
       <div class="right menu">
@@ -22,19 +22,28 @@
       </div>
   </div>
 <div class="ui text container" id="projectList_root">
-    <table class="ui selectable celled table">
-        <thead>
-        <tr>
-            <th>Project Name</th>
-            <th>Budget</th>
-            <th>Status</th>
-            <th>Edit</th>
-        </tr>
-        </thead>
-        <tbody id="tBody_projectList">
+    <div class="ui segment">
+        <h1>Project List</h1>
+        <div class="ui active inverted dimmer" id="projectLoader">
+            <div class="ui text loader">Loading</div>
+        </div>
+        <p>
+        <table class="ui selectable celled table">
+            <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Budget</th>
+                <th>Status</th>
+                <th>Edit</th>
+            </tr>
+            </thead>
+            <tbody id="tBody_projectList">
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+        </p>
+    </div>
+
 </div>
 <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
 <script src="firebase_config.js"></script>
