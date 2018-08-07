@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
+</head>
+<body onload="fetchProjects()">
+  <div class="ui secondary pointing menu">
+      <a class="active item">
+          Home
+      </a>
+      <div class="right menu">
+          <a class="ui item">
+              Logout
+          </a>
+      </div>
+  </div>
+<div class="ui text container" id="projectList_root">
+    <table class="ui selectable celled table">
+        <thead>
+        <tr>
+            <th>Project Name</th>
+            <th>Budget</th>
+            <th>Status</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody id="tBody_projectList">
+
+        </tbody>
+    </table>
+</div>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script src="firebase_config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://chancejs.com/chance.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="main.js"></script>
+</body>
+</html>

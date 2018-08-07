@@ -1,10 +1,10 @@
-document.getElementById('projectInputForm').addEventListener('submit', saveProject);
+// document.getElementById('projectInputForm').addEventListener('submit', saveProject);
 
 var database = firebase.database();
 
 function fetchProjects () {
 
-  var projectsList = document.getElementById('projectsList');
+  var projectsList = document.getElementById('tBody_projectList');
 
   var projects = [];
 
@@ -41,17 +41,14 @@ function fetchProjects () {
 
           console.log("loaded"+i);
 
-          projectsList.innerHTML +=   '<div class="well">'+
-                                    '<h6>Project ID: ' + id + '</h6>'+
-                                    '<p><span class="label label-info">' + status + '</span></p>'+
-                                    '<h3>Project Name : ' + desc + '</h3>'+
-                                    '<p>' +
-                                    '<span class="glyphicon glyphicon-user"></span> Team : ' + '</p>'+
-                                    '<span class="glyphicon glyphicon-usd"></span> Budget : ' + budget + '</p>'+
-                                    '<a href="#" class="btn btn-success" onclick="setStatusDone(\''+id+'\')">Done</a> '+
-                                    '<a href="#" class="btn btn-danger" onclick="deleteProject(\''+id+'\')">Delete</a> '+
-                                    '<a href="/project.html?id='+id+'" class="btn btn-danger" >Edit</a>'+
-                                    '</div>';
+          projectsList.innerHTML += '<tr>' +
+                      '<td>'+ desc + '</td>' +
+                      '<td>'+ budget +'</td>' +
+                      '<td class="positive">'+status+'</td>' +
+                      '<td class="selectable">' +
+                          '<a href="/project.html?id='+id+'">Edit</a>' +
+                      '</td>'+
+                  '</tr>';
         }
     });
 

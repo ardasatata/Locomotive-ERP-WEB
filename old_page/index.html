@@ -8,13 +8,20 @@
     <title>Project Locomotive</title>
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="semantic/dist/semantic.min.js"></script>
 
   </head>
-  <body onload="Load()">
-    
+  <body onload="fetchProjects()">
     <div class="container">
-
+      <h1>Locomotive Project Tracker</h1>
       <div class="jumbotron">
         <h3>Add New Project</h3>
         <form id="projectInputForm">
@@ -52,35 +59,22 @@
           <button type="submit" class="btn btn-primary">Add Project</button>
         </form>
       </div>
-
-      <div id="projectInfo">
-      </div>
-
-      <div id="budgetInfo">
-        <div id="projectBudget">
+      <div class="row">
+        <div class="col-lg-12">
+          <div id="projectsList">
+          </div>
         </div>
       </div>
+      <div class="footer">
+        <p>&copy Arda Satata</p>
+      </div>
     </div>
-
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  // TODO: Replace with your project's customized code snippet
-  var config = {
-    apiKey: "AIzaSyB-Pa3WVucPY73d84EfTWJIV3y9uwh-Fi8",
-    authDomain: "loco-projecttracker.firebaseapp.com",
-    databaseURL: "https://loco-projecttracker.firebaseio.com",
-    projectId: "loco-projecttracker",
-    storageBucket: "loco-projecttracker.appspot.com",
-    messagingSenderId: "463924943381"
-  };
-  firebase.initializeApp(config);
-</script>
+    <script src="firebase_config.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://chancejs.com/chance.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
-    <script src="project.js"></script>
-    <script src="budget.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
