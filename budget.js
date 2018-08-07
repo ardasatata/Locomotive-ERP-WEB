@@ -1,6 +1,8 @@
 var database = firebase.database();
 var projectId = getURLParameter('id');
 
+document.getElementById('projectAddExpense').addEventListener('submit', saveProject);
+
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
   .exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
@@ -63,6 +65,10 @@ function fetchBudgetData(){
 function createBudget(){
   var query = database.ref('budgets/'+projectId);
   console.log("Budget Created "+projectId);
+}
+
+function saveExpense(e){
+
 }
 
 function addExpense(amount,desc){
