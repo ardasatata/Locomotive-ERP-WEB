@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Project</title>
+    <title>Title</title>
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
     <script
             src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -10,7 +10,7 @@
             crossorigin="anonymous"></script>
     <script src="semantic/dist/semantic.min.js"></script>
 </head>
-<body onload="loadEditProject()">
+<body onload="">
 <div class="ui secondary pointing menu" id="navbarUtama">
     <a class="active item" onclick="location.href = '/'">
         Home
@@ -22,45 +22,43 @@
     </div>
 </div>
 <div class="ui text container" style="padding: 2em">
-    <h1>Project Edit</h1>
-
-    <form class="ui form" id="projectEditForm">
+    <div class="ui segment">
+    <h1>Add Project</h1>
+    <form class="ui form" id="projectAddForm">
         <div class="field">
             <label>Project Name</label>
-            <input type="text" placeholder="Project Name" id="projectEditFormName">
+            <input type="text" placeholder="Project Name" id="projectNameInput">
         </div>
         <div class="field">
             <label>Description</label>
-            <textarea rows="3" id="projectEditFormDesc"></textarea>
+            <textarea rows="3" id="projectDescInput"></textarea>
         </div>
-        <div class="field">
-            <label>Project Status</label>
-            <div class="ui selection dropdown">
-                <input id="projectEditFormStatus">
-                <i class="dropdown icon"></i>
-                <div class="default text"></div>
-                <div class="menu">
-                    <div class="item" data-value="0">Belum Take</div>
-                    <div class="item" data-value="1">Editing</div>
-                    <div class="item" data-value="2">Revisi</div>
-                    <div class="item" data-value="3">Done</div>
-                </div>
-            </div>
-        </div>
+        <!--<div class="field">-->
+            <!--<label>Gender</label>-->
+            <!--<div class="ui selection dropdown">-->
+                <!--<input type="hidden" name="gender">-->
+                <!--<i class="dropdown icon"></i>-->
+                <!--<div class="default text">Gender</div>-->
+                <!--<div class="menu">-->
+                    <!--<div class="item" data-value="1">Male</div>-->
+                    <!--<div class="item" data-value="0">Female</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="field">
             <label>Budget</label>
-            <input type="text" placeholder="Enter budget amount" id="projectEditFormBudget">
+            <input type="text" placeholder="Enter budget amount" id="projectBudgetInput">
         </div>
-        <button class="ui button" type="submit">Submit</button>
+        <button class="ui button blue" type="submit">Add Project</button>
     </form>
-
+    </div>
 </div>
-
 <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
 <script src="firebase_config.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="http://chancejs.com/chance.min.js"></script>
-<script src="project.js"></script>
-
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="main.js"></script>
 </body>
 </html>

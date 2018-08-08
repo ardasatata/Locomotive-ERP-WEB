@@ -1,4 +1,4 @@
-// document.getElementById('projectInputForm').addEventListener('submit', saveProject);
+document.getElementById('projectAddForm').addEventListener('submit', saveProject);
 
 var database = firebase.database();
 
@@ -27,7 +27,7 @@ function fetchProjects () {
 
       var project = {
         id: childData['id'],
-        description: childData['description'],
+        name: childData['name'],
         status: childData['status'],
         budget: childData['budget']
       }
@@ -37,10 +37,10 @@ function fetchProjects () {
       //console.log(projects);
       });
     }).then(()=>{
-
-        for (var i = 0; i < projects.length; i++) {
+        var no = 1;
+        for (var i = projects.length -1; i >= 0 ; i--) {
           var id = projects[i].id;
-          var desc = projects[i].description;
+          var name = projects[i].name;
           var status = projects[i].status;
           //var team = projects[i].team;
           var budget = projects[i].budget;
@@ -49,13 +49,12 @@ function fetchProjects () {
           console.log("loaded"+i);
 
           projectsList.innerHTML += '<tr>' +
-                      '<td>'+ desc + '</td>' +
-                      '<td>'+ budget +'</td>' +
+                      '<td>'+ (no) + '</td>' +
+                      '<td class="selectable"> <a href="project.html?id='+id+'">'+ name + '</a></td>' +
+                      '<td style="text-align: right">'+ budget +'</td>' +
                       '<td class="positive">'+status+'</td>' +
-                      '<td class="selectable">' +
-                          '<a href="/project.html?id='+id+'">Edit</a>' +
-                      '</td>'+
                   '</tr>';
+          no++;
         }
 
         projectTableLoading();
@@ -67,17 +66,21 @@ function fetchProjects () {
 
 }
 
-function saveProject(e) {
+function saveProject(e) { //add project
+    var projectDateAdded = new Date().getTime();
   var projectId = chance.guid();
+  var projectName = document.getElementById('projectNameInput').value;
   var projectDesc = document.getElementById('projectDescInput').value;
-  var projectStatus = document.getElementById('projectStatusInput').value;
+  var projectStatus = "Belum Take";
   //var projectTeam = document.getElementById('projectTeamInput').value;
   var projectBudget = document.getElementById('projectBudgetInput').value;
   var project = {
-    id: projectId,
-    description: projectDesc,
-    status: projectStatus,
-    budget: projectBudget
+      id: projectId,
+      dateAdded:projectDateAdded,
+      name: projectName,
+      description: projectDesc,
+      status: projectStatus,
+      budget: projectBudget
   }
 
   var query = firebase.database().ref('projects/' + projectId).set(project);

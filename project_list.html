@@ -24,6 +24,7 @@
 <div class="ui text container" id="projectList_root">
     <div class="ui segment">
         <h1>Project List</h1>
+        <button class="ui button blue" onclick="location.href = '/addProject.html'">Add Project</button>
         <div class="ui active inverted dimmer" id="projectLoader">
             <div class="ui text loader">Loading</div>
         </div>
@@ -31,10 +32,10 @@
         <table class="ui selectable celled table">
             <thead>
             <tr>
+                <th>No.</th>
                 <th>Project Name</th>
-                <th>Budget</th>
+                <th style="text-align: center">Budget</th>
                 <th>Status</th>
-                <th>Edit</th>
             </tr>
             </thead>
             <tbody id="tBody_projectList">
