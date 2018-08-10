@@ -7,13 +7,16 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Project Locomotive</title>
       <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+      <link rel="stylesheet" href="/node_modules/semantic-ui-calendar/dist/calendar.min.css" />
       <script
               src="https://code.jquery.com/jquery-3.1.1.min.js"
               integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
               crossorigin="anonymous"></script>
       <script src="semantic/dist/semantic.min.js"></script>
+      <script type="text/javascript" src="/node_modules/semantic-ui-calendar/dist/calendar.min.js"></script>
+
   </head>
-  <body onload="Load()">
+  <body onload="Load()" >
 
   <div class="ui secondary pointing menu" id="navbarUtama">
       <a class="active item" onclick="location.href = '/'">
@@ -26,10 +29,14 @@
       </div>
   </div>
 
+  <div class="ui active inverted dimmer" id="projectLoader">
+      <div class="ui text loader">Loading</div>
+  </div>
+
   <div class="ui text container" style="padding: 2em">
       <div class="ui segment">
           <div class="content">
-              <div class="header" style="padding: 8px"><h1>Project Name</h1></div>
+              <div class="header" style="padding: 8px"><h1 id="pName">Project Name</h1></div>
           </div>
           <div class="content" style="padding: 2em" id="projectPageContent">
               <div>Project ID : </div>
@@ -46,6 +53,65 @@
       </div>
   </div>
 
+  <div class="ui text container" style="padding: 2em">
+      <h1>Project Schedule</h1>
+      <form class="ui form equal width"  >
+          <div class="fields">
+          <div class="field">
+              <h3>Masukan Tanggal</h3>
+              <div class="ui calendar" id="pCalendarDate">
+                  <div class="ui input left icon">
+                      <i class="calendar icon"></i>
+                      <input type="text" placeholder="Date">
+                  </div>
+              </div>
+          </div>
+          <div class="field">
+              <h3>Masukan Jam</h3>
+              <div class="ui calendar" id="pCalendarTime">
+                  <div class="ui input left icon">
+                      <i class="time icon"></i>
+                      <input type="text" placeholder="Time">
+                  </div>
+              </div>
+          </div>
+          </div>
+          <div class="field">
+              <label>Deskripsi Jadwal</label>
+              <textarea rows="3" ></textarea>
+          </div>
+          <button type="submit" class="ui button" >Add Schedule</button>
+      </form>
+  </div>
+
+  <div class="ui text container" style="padding: 1em" >
+      <table class="ui selectable celled table">
+          <thead>
+          <tr>
+              <th>No</th>
+              <th>Tanggal</th>
+              <th>Jam</th>
+              <th>Desc</th>
+              <th></th>
+              <th></th>
+          </tr>
+          </thead>
+          <tbody id="pDateBody">
+          <tr class="">
+              <td>1</td>
+              <td>August 8, 2018</td>
+              <td>9:00 AM</td>
+              <td>Take di RS</td>
+              <td class="selectable positive" style="text-align: center">
+                  <i class="icon check circle"></i>
+              </td>
+              <td class="selectable negative" style="text-align: center">
+                  <i class="icon close"></i>
+              </td>
+          </tr>
+          </tbody>
+      </table>
+  </div>
 
   <div class="ui text container" style="padding: 2em">
       <h1>Project Budget</h1>
@@ -77,7 +143,7 @@
               <td>1</td>
               <td>Sewa Super Kamera</td>
               <td>20000</td>
-              <td class="selectable negative">
+              <td class="selectable negative" style="text-align: center">
                   <a href="#">Delete</a>
               </td>
           </tr>
@@ -89,7 +155,6 @@
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script src="firebase_config.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://chancejs.com/chance.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
     <script src="budget.js"></script>

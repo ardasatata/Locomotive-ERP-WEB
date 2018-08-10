@@ -1,4 +1,7 @@
 var database = firebase.database();
+var pId = getURLParameter('id');
+
+var id_,name,desc,status,budget,pengeluaran,dateAdded,sisa;
 
 function getURLParameter(name) {
   return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
@@ -6,8 +9,21 @@ function getURLParameter(name) {
 }
 
 function Load(){
+    $('#pCalendarDate').calendar({
+        type: 'date'
+    });
+    $('#pCalendarTime').calendar({
+        type: 'time'
+    });
   fetchProjectData(getURLParameter('id'));
   fetchBudgetData();
+}
+
+function projectTableLoading(){
+    var projectTable = document.getElementById("projectLoader");
+    var currentClass = projectTable.className;
+
+    projectTable.className = "ui inverted dimmer";
 }
 
 //function edit
@@ -15,27 +31,34 @@ function Load(){
 function fetchProjectData(id){
   var projectInfo = document.getElementById('projectPageContent');
   var projectEditButton = document.getElementById('projectEditButton');
+    var projectName = document.getElementById('pName');
+
   console.log(id);
   projectInfo.innerHTML = '';
 
   var query = database.ref('projects/'+id);
 
-  var id_,desc,status,budget,pengeluaran,dateAdded;
+
+  sumPengeluaran(pId);
+  sumBalance();
 
   query.once('value').then(function(snapshot) {
 
     id_ = snapshot.val().id;
+     name = snapshot.val().name;
     desc = snapshot.val().description;
     status = snapshot.val().status;
     //var team = projects[i].team;
       dateAdded = new Date(snapshot.val().dateAdded);
     budget = snapshot.val().budget;
-    pengeluaran = sumPengeluaran(id_);
+    pengeluaran = sumBudget;
+    sisa = sumSisa;
 
 
 
   console.log(snapshot.val().budget);
   }).then(()=>{
+      projectName.innerText = name;
 
   projectInfo.innerHTML =   '<div>Project ID   : '+id_+' </div>'+
                             '<div>Description : '+desc+' </div>'+
@@ -43,10 +66,11 @@ function fetchProjectData(id){
                             '<div>End Date : - </div>'+
                             '<div>Budget : '+budget+' </div>'+
                             '<div id="pExpense">Expense : '+pengeluaran+' </div>'+
-                            '<div id="pSisa">Sisa : - </div>';
+                            '<div id="pSisa">Sisa : '+sisa+' </div>';
 
                           }
                         ).finally(()=>{
+      projectTableLoading();
         $("#projectEditButton").click(function () {
             window.location.href = "/projectEdit.html?id="+id_;
         });
@@ -78,64 +102,71 @@ function testDate(){
 function loadEditProject() {
 
     $('.ui.dropdown')
-        .dropdown()
-    ;
+        .dropdown();
 
     document.getElementById('projectEditForm').addEventListener('submit', saveEditProject);
 
-    var pName = document.getElementById('projectEditFormName');
-    var pDesc = document.getElementById('projectEditFormDesc');
-    var pStatus = document.getElementById('projectEditFormStatus');
+    fetchProjectEditData(getURLParameter('id'));
 
-    pName.value = "hehe";
-    pDesc.value = "desc hehe ddd";
-    pStatus.value = "Done";
+    }
+
+function testDropdown() {
+    console.log($('.ui.dropdown').dropdown('get value'));
+    $('.ui.dropdown').dropdown('set selected',"Editing");
 }
 
 function fetchProjectEditData(id){
-    var projectInfo = document.getElementById('projectPageContent');
-    var projectEditButton = document.getElementById('projectEditButton');
+    var eProjectName = document.getElementById('projectEditFormName');
+    var eProjectDesc = document.getElementById('projectEditFormDesc');
+    var eProjectBudget = document.getElementById('projectEditFormBudget');
+
     console.log(id);
-    projectInfo.innerHTML = '';
 
     var query = database.ref('projects/'+id);
 
-    var id_,desc,status,budget,pengeluaran,dateAdded;
+    var eName,eDesc,eStatus,eBudget;
+
 
     query.once('value').then(function(snapshot) {
 
-        id_ = snapshot.val().id;
-        desc = snapshot.val().description;
-        status = snapshot.val().status;
-        //var team = projects[i].team;
-        dateAdded = new Date(snapshot.val().dateAdded);
-        budget = snapshot.val().budget;
-        pengeluaran = sumPengeluaran(id_);
+        eName = snapshot.val().name;
+        eDesc = snapshot.val().description;
+        eStatus = snapshot.val().status;
+        eBudget = snapshot.val().budget;
 
+        console.log(eDesc)
 
-
-        console.log(snapshot.val().budget);
     }).then(()=>{
 
-            projectInfo.innerHTML =   '<div>Project ID   : '+id_+' </div>'+
-                '<div>Description : '+desc+' </div>'+
-                '<div>Date Added : '+dateAdded+' </div>'+
-                '<div>End Date : - </div>'+
-                '<div>Budget : '+budget+' </div>'+
-                '<div id="pExpense">Expense : '+pengeluaran+' </div>'+
-                '<div id="pSisa">Sisa : - </div>';
+        eProjectName.setAttribute('value',eName);
+        eProjectDesc.innerText = eDesc;
+        $('.ui.dropdown').dropdown('set selected',eStatus);
+        eProjectBudget.setAttribute('value',eBudget);
 
         }
     ).finally(()=>{
-        $("#projectEditButton").click(function () {
-            window.location.href = "/projectEdit.html?id="+id_;
-        });
-        console.log(projectEditButton);
-
+        projectTableLoading();
     });
 }
 
 function saveEditProject(e) {
-    console.log("save edit project")
+
+    var eProjectName = document.getElementById('projectEditFormName').value;
+    var eProjectDesc = document.getElementById('projectEditFormDesc').value;
+    var eProjectBudget = document.getElementById('projectEditFormBudget').value;
+    var eProjectStatus  =  $('.ui.dropdown').dropdown('get value');
+
+    database.ref('projects/'+pId+'/name').set(eProjectName);
+    database.ref('projects/'+pId+'/description').set(eProjectDesc);
+    database.ref('projects/'+pId+'/status').set(eProjectStatus);
+    database.ref('projects/'+pId+'/budget').set(eProjectBudget);
+
+    console.log(eProjectName);
+    console.log(eProjectDesc);
+    console.log(eProjectBudget);
+    console.log(eProjectStatus);
+
+    loadEditProject();
+    console.log("project saved");
     e.preventDefault();
 }

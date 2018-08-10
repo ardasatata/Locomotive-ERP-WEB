@@ -24,6 +24,10 @@
 <div class="ui text container" style="padding: 2em">
     <h1>Project Edit</h1>
 
+    <div class="ui active inverted dimmer" id="projectLoader">
+        <div class="ui text loader">Loading</div>
+    </div>
+
     <form class="ui form" id="projectEditForm">
         <div class="field">
             <label>Project Name</label>
@@ -31,7 +35,7 @@
         </div>
         <div class="field">
             <label>Description</label>
-            <textarea rows="3" id="projectEditFormDesc"></textarea>
+            <textarea rows="8" id="projectEditFormDesc"></textarea>
         </div>
         <div class="field">
             <label>Project Status</label>
@@ -40,10 +44,10 @@
                 <i class="dropdown icon"></i>
                 <div class="default text"></div>
                 <div class="menu">
-                    <div class="item" data-value="0">Belum Take</div>
-                    <div class="item" data-value="1">Editing</div>
-                    <div class="item" data-value="2">Revisi</div>
-                    <div class="item" data-value="3">Done</div>
+                    <div class="item" data-value="Belum Take">Belum Take</div>
+                    <div class="item" data-value="Editing">Editing</div>
+                    <div class="item" data-value="Revisi">Revisi</div>
+                    <div class="item" data-value="Done">Done</div>
                 </div>
             </div>
         </div>

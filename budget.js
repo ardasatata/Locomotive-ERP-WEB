@@ -2,6 +2,8 @@ var database = firebase.database();
 var projectId = getURLParameter('id');
 var budgetsRef = firebase.database().ref("budgets/"+projectId);
 
+var sumBudget,sumSisa;
+
 document.getElementById('projectAddExpense').addEventListener('submit', saveExpense);
 
 function getURLParameter(name) {
@@ -58,8 +60,8 @@ function fetchBudgetData(){
                 '<td>'+(i+1)+'</td>'+
                 '<td>'+desc+'</td>'+
                 '<td style="text-align: right">'+amount+'</td>'+
-                '<td class="selectable negative">'+
-                '<a onclick='+budgetId+'>Delete</a>'+
+                '<td class="selectable negative" style="text-align: center">'+
+                '<i class="icon close" onclick='+budgetId+'></i>'+
                 '</td>'+
                 '</tr>';
         }
@@ -127,11 +129,14 @@ function showBudget(){
 }
 
 function sumPengeluaran(idProject){
+
   var query = firebase.database().ref("budgets/"+idProject);
 
-  let sum = 0;
+    sumBudget = 0;
+    var sum = 0;
 
   query.once('value').then(function(snapshot){
+
     snapshot.forEach(function(childSnapshot){
       var key = childSnapshot.key;
       var childData = childSnapshot.val();
@@ -140,8 +145,27 @@ function sumPengeluaran(idProject){
       sum += childData.amount;
     })
   }).then(()=>{
-    console.log(sum);
-    return sum;
+      sumBudget = sum;
+    console.log(sumBudget);
+  }).finally(()=>{
+      return sumBudget;
   });
+}
+
+function sumBalance(){
+
+    var query = firebase.database().ref("projects/"+projectId+"/budget");
+
+    sumSisa = 0;
+
+    query.once('value').then(function(snapshot){
+
+        budget = snapshot.val().budget;
+
+        }
+    ).then(()=>{
+        sumSisa = budget - sumBudget;
+        console.log(budget);
+    });
 }
 
