@@ -13,10 +13,12 @@ function Load(){
         type: 'date'
     });
     $('#pCalendarTime').calendar({
-        type: 'time'
+        type: 'time',
+        ampm: false,
     });
   fetchProjectData(getURLParameter('id'));
   fetchBudgetData();
+  fetchScheduleData();
 }
 
 function projectTableLoading(){
@@ -40,7 +42,7 @@ function fetchProjectData(id){
 
 
   sumPengeluaran(pId);
-  sumBalance();
+  sumBalance(pId);
 
   query.once('value').then(function(snapshot) {
 
@@ -52,7 +54,7 @@ function fetchProjectData(id){
       dateAdded = new Date(snapshot.val().dateAdded);
     budget = snapshot.val().budget;
     pengeluaran = sumBudget;
-    sisa = sumSisa;
+    sisa = budget - pengeluaran;
 
 
 

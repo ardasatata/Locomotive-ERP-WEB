@@ -80,7 +80,10 @@ function saveExpense(e){
 
     addExpense(pExpense,pExpenseDesc);
 
-    console.log(pExpense+" "+pExpenseDesc);
+    $('#pInputExpense').val("");
+    $('#pInputExpenseDesc').val("");
+    //console.log(pExpense+" "+pExpenseDesc);
+
     e.preventDefault();
 }
 
@@ -130,29 +133,47 @@ function showBudget(){
 
 function sumPengeluaran(idProject){
 
-  var query = firebase.database().ref("budgets/"+idProject);
+    var query = firebase.database().ref("budgets/"+idProject);
 
     sumBudget = 0;
     var sum = 0;
 
-  query.once('value').then(function(snapshot){
+    query.once('value').then(function(snapshot){
 
-    snapshot.forEach(function(childSnapshot){
-      var key = childSnapshot.key;
-      var childData = childSnapshot.val();
-      //console.log(key+" "+childData.amount);
+        snapshot.forEach(function(childSnapshot){
+            var key = childSnapshot.key;
+            var childData = childSnapshot.val();
+            //console.log(key+" "+childData.amount);
 
-      sum += childData.amount;
-    })
-  }).then(()=>{
-      sumBudget = sum;
-    console.log(sumBudget);
-  }).finally(()=>{
-      return sumBudget;
-  });
+            sum += childData.amount;
+        })
+    }).then(()=>{
+        sumBudget = sum;
+        console.log(sumBudget);
+    }).finally(()=>{
+        return sumBudget;
+    });
 }
 
-function sumBalance(){
+function sumBalance(idProject){
+
+    var query = firebase.database().ref("projects/"+idProject+"/budget");
+
+    sumSisa = 0;
+
+    var budget;
+
+    query.once('value').then(function(snapshot){
+        budget = snapshot.val();
+    }).then(()=>{
+        sumSisa = budget - sumBudget;
+        console.log(sumSisa+" sumsisa");
+    }).finally(()=>{
+        return sumSisa;
+    });
+}
+
+function sumBalance2(){
 
     var query = firebase.database().ref("projects/"+projectId+"/budget");
 
