@@ -11,12 +11,8 @@ function getURLParameter(name) {
   .exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
-function fetchBudgetData(){
+function fetchBudgetData(){  // ambil semua data budget
     var budgetExpense = document.getElementById('pExpense');
-    //console.log(projectId);
-    //var pExpense = sumPengeluaran(projectId);
-    //console.log(pExpense);
-    //budgetExpense.innerHTML = pExpense;
 
     var pBudgetBody = document.getElementById('pBudgetBody');
     //console.log(id);
@@ -69,12 +65,12 @@ function fetchBudgetData(){
 
 }
 
-function createBudget(){
+function createBudget(){ //create budget apabila masih null
   var query = database.ref('budgets/'+projectId);
   console.log("Budget Created "+projectId);
 }
 
-function saveExpense(e){
+function saveExpense(e){ //save pengeluaran
     var pExpense = parseInt(document.getElementById("pInputExpense").value);
     var pExpenseDesc = document.getElementById("pInputExpenseDesc").value;
 
@@ -173,20 +169,4 @@ function sumBalance(idProject){
     });
 }
 
-function sumBalance2(){
-
-    var query = firebase.database().ref("projects/"+projectId+"/budget");
-
-    sumSisa = 0;
-
-    query.once('value').then(function(snapshot){
-
-        budget = snapshot.val().budget;
-
-        }
-    ).then(()=>{
-        sumSisa = budget - sumBudget;
-        console.log(budget);
-    });
-}
 
