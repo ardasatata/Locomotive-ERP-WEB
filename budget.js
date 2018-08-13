@@ -40,10 +40,14 @@ function fetchBudgetData(){  // ambil semua data budget
       })
     }).then(()=>{
 
+        var total = 0;
+
         for (var i = 0; i < budgets.length; i++) {
             var idBudget = budgets[i].id;
             var desc = budgets[i].description;
             var amount = budgets[i].amount;
+
+            total += amount;
 
             //console.log("loaded"+i+budgets[i].id);
 
@@ -61,6 +65,15 @@ function fetchBudgetData(){  // ambil semua data budget
                 '</td>'+
                 '</tr>';
         }
+
+        pBudgetBody.innerHTML +=
+            '<tr>'+
+            '<td></td>'+
+            '<td><h4>TOTAL</h4></td>'+
+            '<td style="text-align: right"><h4>IDR  '+total+',00</h4></td>'+
+            '<td>'+
+            '</td>'+
+            '</tr>';
     });
 
 }

@@ -63,6 +63,7 @@ function fetchProjectData(id){
       projectName.innerText = name;
 
   projectInfo.innerHTML =   '<div>Project ID   : '+id_+' </div>'+
+                            '<div>Status   : '+status+' </div>'+
                             '<div>Description : '+desc+' </div>'+
                             '<div>Date Added : '+dateAdded+' </div>'+
                             '<div>End Date : - </div>'+
@@ -170,5 +171,6 @@ function saveEditProject(e) {
 
     loadEditProject();
     console.log("project saved");
+    window.history.back();
     e.preventDefault();
 }
