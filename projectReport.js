@@ -13,6 +13,8 @@ function getURLParameter(name) {
 
 function fetchAllData() {
 
+    //project Data
+
     var queryProject = database.ref('projects/'+pId);
 
     sumPengeluaran(pId);
@@ -34,7 +36,13 @@ function fetchAllData() {
         console.log(snapshot.val().budget);
     });
 
+    //Budget Data
+
     var queryBudget = database.ref('budgets/'+pId);
+
+    var pBudgetBody = document.getElementById('pBudgetBody');
+    //console.log(id);
+    pBudgetBody.innerHTML = '';
 
     queryBudget.once('value').then(function(snapshot) {
         snapshot.forEach(function (childSnapshot) {
@@ -63,13 +71,81 @@ function fetchAllData() {
 
             //console.log("loaded"+i+budgets[i].id);
 
-            var budgetId = "\"removeBudget(\'"+idBudget+"\')\"";
-
             //console.log(budgetId);
 
+            pBudgetBody.innerHTML +=
+                '<tr>'+
+                '<td>'+(i+1)+'</td>'+
+                '<td>'+desc+'</td>'+
+                '<td style="text-align: right">'+amount+'</td>'+
+                '</tr>';
         }
 
+        pBudgetBody.innerHTML +=
+            '<tr>'+
+            '<td></td>'+
+            '<td><h4>TOTAL</h4></td>'+
+            '<td style="text-align: right"><h4>IDR  '+total+',00</h4></td>'+
+            '</tr>';
+    }
+    );
 
+    console.log('test Schedule');
+
+    var querySchedules = database.ref('schedules/'+pId);
+
+    var sTime = document.getElementById('pDateBody');
+
+    sTime.innerHTML = '';
+
+    var schedules = [];
+
+    querySchedules.once('value').then(function(snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+
+            var schedule = {
+                id: childSnapshot.key,
+                date: childSnapshot.val().date,
+                time: childSnapshot.val().time,
+                desc: childSnapshot.val().desc,
+                status: childSnapshot.val().status
+            }
+
+            //console.log(budget);
+            pSchedules.push(schedule);
+        })
+    }).then(()=>{
+
+        for (var i = 0; i < pSchedules.length; i++) {
+
+            var idSchedule = pSchedules[i].id;
+            var date = pSchedules[i].date;
+            var time = pSchedules[i].time;
+            var desc = pSchedules[i].desc;
+            var status = pSchedules[i].status;
+
+            var tdClass = "";
+
+            if (status){
+                tdClass = "positive";
+            }
+
+            //console.log("loaded"+i+budgets[i].id);
+
+            var doneSchedule = "\"doneSchedule(\'"+idSchedule+"\')\"";
+            var removeSchedule = "\"removeSchedule(\'"+idSchedule+"\')\"";
+
+            //console.log(doneSchedule);
+
+            sTime.innerHTML +=
+                '<tr class= "'+tdClass+'">'+
+                '<td>'+(i+1)+'</td>'+
+                '<td>'+date+'</td>'+
+                '<td>'+time+'</td>'+
+                '<td>'+desc+'</td>'+
+                '</td>'+
+                '</tr>';
+        }
     });
 
 }

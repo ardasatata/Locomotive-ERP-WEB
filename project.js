@@ -19,6 +19,11 @@ function Load(){
   fetchProjectData(getURLParameter('id'));
   fetchBudgetData();
   fetchScheduleData();
+
+  //var pReportButton = document.getElementById('projectReportButton');
+    $("#projectReportButton").click(function () {
+        window.location.href = "/ProjectReport.html?id="+id_;
+    });
 }
 
 function projectTableLoading(){
