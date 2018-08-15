@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Project Report Locomotive</title>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+
+</head>
+    <body onload="" style="align-items: center; align-content: center;">
+
+    <div align="center">
+
+    <table width="800" style="width: 800px">
+        <tbody>
+        <tr>
+            <td align="center" colspan="2" class="head" >
+                <img style="float: left; z-index: 100; padding-top: 8px " src="img/production-logo-black.png" width="75"/>
+                <br>
+                <strong style="position: center; ">CV. Cakralaksana Sejahtera<br>
+                    Locomotive Production <br>
+                    <a href="https://www.locomotiveproduction.com" target="_blank">www.locomotiveproduction.com</a> <br>
+                    <br>
+                </strong>
+            </td>
+        </tr>
+        <!--<tr>-->
+            <!--<td id="tanggalBuat">-->
+                <!--Tanggal buat : 21-Jul-2018  </td>-->
+            <!--<td align="right" id="tanggalCetak">-->
+                <!--Tanggal cetak : 15-Aug-2018 09:44</td>-->
+        <!--</tr>-->
+        </tbody>
+    </table>
+        <table width="800" style="padding-top: 2em">
+            <tbody>
+            <tr>
+                <td colspan="2"><strong>LAPORAN PROJECT</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Nama Project : </strong></td>
+                <td id="namaProject">Profile Laopan</td>
+            </tr>
+            <tr>
+                <td width="100"><strong>Unit Produksi : </strong></td>
+                <td>Locomotive Production</td>
+            </tr>
+            <tr>
+            </tr>
+            </tbody>
+        </table>
+        <div class="ui segment" style="width: 800px">
+            <h2>Detail Project</h2>
+            <table width="750px">
+                <tbody>
+                <tr>
+                    <td><strong>Project ID  </strong></td>
+                    <td >Profile Laopan</td>
+                </tr>
+                <tr>
+                    <td width="100"><strong>Description  </strong></td>
+                    <td>Locomotive Production</td>
+                </tr>
+                <tr>
+                    <td width="100"><strong>Start Date  </strong></td>
+                    <td>Locomotive Production</td>
+                </tr>
+                <tr>
+                    <td width="100"><strong>End Date  </strong></td>
+                    <td>Locomotive Production</td>
+                </tr>
+                <tr>
+                    <td width="100"><strong>Budget   </strong></td>
+                    <td>Locomotive Production</td>
+                </tr>
+                <tr>
+                    <td width="100"><strong>Expense  </strong></td>
+                    <td>Locomotive Production</td>
+                </tr>
+                <tr>
+                    <td width="100"><strong>Sisa  </strong></td>
+                    <td>Locomotive Production</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ui segment" style="width: 800px">
+            <h2>Project Expense</h2>
+            <table class="ui selectable celled table">
+                <thead>
+                <tr>
+                    <th width="50">No</th>
+                    <th>Expense Desc</th>
+                    <th style="text-align: center">Amount</th>
+                </tr>
+                </thead>
+                <tbody id="pBudgetBody">
+                <tr>
+                    <td>1</td>
+                    <td>Sewa Super Kamera</td>
+                    <td>20000</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ui segment" style="width: 800px">
+            <h2>Project Schedule</h2>
+            <table class="ui selectable celled table">
+                <thead>
+                <tr>
+                    <th width="50">No</th>
+                    <th>Tanggal</th>
+                    <th>Jam</th>
+                    <th>Desc</th>
+                </tr>
+                </thead>
+                <tbody id="pDateBody">
+                <tr class="">
+                    <td>1</td>
+                    <td>August 8, 2018</td>
+                    <td>9:00 AM</td>
+                    <td>Take di RS</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+        <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+        <script src="firebase_config.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
+        <script src="http://chancejs.com/chance.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
+        <script src="budget.js"></script>
+        <script src="project.js"></script>
+        <script src="schedule.js"></script>
+        <script src="projectReport.js"></script>
+        </body>
+</html>
