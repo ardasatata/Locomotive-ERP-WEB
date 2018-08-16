@@ -26,14 +26,29 @@ function Load(){
     });
 }
 
-function projectCancel(){ // Remove Project dan semuanya budget dan schedules
-    //prompt dulu
+function projectDelete(){ // Remove Project dan semuanya budget dan schedules
+    if (confirm("Anda akan menghapus project ini!")) {
+        database.ref('projects/'+pId).remove(); //Delete semua Ref projects,budgets,dan schedules
+        database.ref('budgets/'+pId).remove();
+        database.ref('schedules/'+pId).remove();
+        location.href='/project_list.html';
+        e.preventDefault();
+    } else {
 
+    }
 }
 
 function projectDone(){ // konfirmasi lalu write done di status
+    if (confirm("Apakah project dinyatakan selesai ?")) {
+        database.ref('projects/'+pId+'/status').set("Done");
+        var endDate = new Date();
+        console.log(endDate);
+        console.log(database.ref('projects/'+pId+'/dateEndded').set(endDate.toDateString()));
+        console.log("project set done");
+    } else {
 
-
+    }
+    location.reload();
 }
 
 function projectTableLoading(){
@@ -69,13 +84,13 @@ function fetchProjectData(id){
 
   query.once('value').then(function(snapshot) {
 
-    id_ = snapshot.val().id;
+    id_ = snapshot.key;
      name = snapshot.val().name;
     desc = snapshot.val().description;
     status = snapshot.val().status;
     //var team = projects[i].team;
       dateAdded = new Date(snapshot.val().dateAdded)
-      dateEndded = "-";
+      dateEndded = snapshot.val().dateEndded;
     budget = snapshot.val().budget;
     pengeluaran = sumBudget;
     sisa = budget - pengeluaran;
@@ -95,14 +110,14 @@ function fetchProjectData(id){
           _pSisa.innerText = sisa;
 
 
-  //projectInfo.innerHTML =   '<div>Project ID   : '+id_+' </div>'+
-                            '<div>Status   : '+status+' </div>'+
-                            '<div>Description : '+desc+' </div>'+
-                            '<div>Date Added : '+dateAdded+' </div>'+
-                            '<div>End Date : - </div>'+
-                            '<div>Budget : '+budget+' </div>'+
-                            '<div id="pExpense">Expense : '+pengeluaran+' </div>'+
-                            '<div id="pSisa">Sisa : '+sisa+' </div>';
+  // //projectInfo.innerHTML =   '<div>Project ID   : '+id_+' </div>'+
+  //                           '<div>Status   : '+status+' </div>'+
+  //                           '<div>Description : '+desc+' </div>'+
+  //                           '<div>Date Added : '+dateAdded+' </div>'+
+  //                           '<div>End Date : - </div>'+
+  //                           '<div>Budget : '+budget+' </div>'+
+  //                           '<div id="pExpense">Expense : '+pengeluaran+' </div>'+
+  //                           '<div id="pSisa">Sisa : '+sisa+' </div>';
 
                           }
                         ).finally(()=>{

@@ -70,8 +70,69 @@ function fetchProjects () {
 
 }
 
+function fetchProjectsArchive () {
+
+    var projectsList = document.getElementById('tBody_projectList');
+
+    var projects = [];
+
+    var query = firebase.database().ref("projects").orderByKey();
+
+    query.once("value").then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            // key will be "ada" the first time and "alan" the second time
+            var key = childSnapshot.key;
+            // childData will be the actual contents of the child
+            var childData = childSnapshot.val();
+            //console.log(childData);
+
+            var project = {
+                id: childData['id'],
+                name: childData['name'],
+                status: childData['status'],
+                budget: childData['budget']
+            }
+
+            //console.log(project);
+
+            if (project.status=="Done") {
+                projects.push(project);
+            }
+
+            //console.log(projects);
+        });
+    }).then(()=>{
+        var no = 1;
+        for (var i = projects.length -1; i >= 0 ; i--) {
+            var id = projects[i].id;
+            var name = projects[i].name;
+            var status = projects[i].status;
+            //var team = projects[i].team;
+            var budget = projects[i].budget;
+
+
+            console.log("loaded"+i);
+
+            projectsList.innerHTML += '<tr>' +
+                '<td>'+ (no) + '</td>' +
+                '<td class="selectable"> <a href="project.html?id='+id+'">'+ name + '</a></td>' +
+                '<td style="text-align: right">'+ budget +'</td>' +
+                '<td class="positive">'+status+'</td>' +
+                '</tr>';
+            no++;
+        }
+
+        projectTableLoading();
+    });
+
+    projectsList.innerHTML = '';
+
+    //console.log(projects[0].id);
+
+}
+
 function saveProject(e) { //add project
-    var projectDateAdded = new Date().getTime();
+    var projectDateAdded = new Date();
   var projectId = chance.guid();
   var projectName = document.getElementById('projectNameInput').value;
   var projectDesc = document.getElementById('projectDescInput').value;
@@ -80,7 +141,7 @@ function saveProject(e) { //add project
   var projectBudget = document.getElementById('projectBudgetInput').value;
   var project = {
       id: projectId,
-      dateAdded:projectDateAdded,
+      dateAdded:projectDateAdded.toDateString(),
       name: projectName,
       description: projectDesc,
       status: projectStatus,
@@ -95,7 +156,8 @@ function saveProject(e) { //add project
 
   fetchProjects();
 
-  e.preventDefault();
+  window.location.replace("/project_list.html");
+
 }
 
 function deleteProject (projectId) {

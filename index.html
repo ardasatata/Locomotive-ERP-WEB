@@ -24,28 +24,45 @@
     <a class="active item" onclick="location.href = '/'">
       Home
     </a>
-    <div class="right menu">
-      <a class="ui item">
-        Logout
-      </a>
-    </div>
+    <!--<div class="right menu">-->
+      <!--<a class="ui item">-->
+        <!--Logout-->
+      <!--</a>-->
+    <!--</div>-->
   </div>
-
-    <div class="ui text container" style="padding: 2em">
-      <h1>Locomotive Project Tracker <small></small></h1>
-    </div>
-    <div class="ui text container" >
-      <div class="ui grid horizontal">
-        <div class="eight wide column" >
-          <button class="massive ui button" onclick="location.href = '/project_list.html';">
-              Project
-            </button>
-          <button class="massive ui button" onclick="location.href = '/project_list.html';">
-            Completed Project
-          </button>
-        </div>
+    <div class="ui text container" style="text-align: center; align-content: center">
+      <div class="segment" style="padding: 4em">
+        <img src="img/production-logo-black.png" width="150"/>
+        <h2>Locomotive Project Tracker</h2>
+      </div>
+      <div class="ui center aligned grid">
+        <table>
+          <tbody>
+          <tr>
+            <td>
+                <button class="massive ui button blue" onclick="location.href = '/project_list.html';">
+                  <i class="file alternate icon"></i>
+                Project
+              </button>
+                <button class="massive ui button" onclick="location.href = '/project_archive.html';">
+                  <i class="archive icon"></i>
+                Archive
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+
+  <footer style="position: fixed; bottom: 0">
+    <div class="ui vertical footer segment form-page">
+      <div class="ui container">
+        Internal Use Only <br>
+        Arda Satata 2018. All Rights Reserved
+      </div>
+    </div>
+  </footer>
 
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
     <script src="firebase_config.js"></script>
@@ -55,4 +72,5 @@
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
     <script src="main.js"></script>
   </body>
+
 </html>
