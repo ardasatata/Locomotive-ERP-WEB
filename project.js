@@ -26,6 +26,16 @@ function Load(){
     });
 }
 
+function projectCancel(){ // Remove Project dan semuanya budget dan schedules
+    //prompt dulu
+
+}
+
+function projectDone(){ // konfirmasi lalu write done di status
+
+
+}
+
 function projectTableLoading(){
     var projectTable = document.getElementById("projectLoader");
     var currentClass = projectTable.className;
@@ -36,15 +46,23 @@ function projectTableLoading(){
 //function edit
 
 function fetchProjectData(id){
-  var projectInfo = document.getElementById('projectPageContent');
+  //var projectInfo = document.getElementById('projectPageContent');
   var projectEditButton = document.getElementById('projectEditButton');
     var projectName = document.getElementById('pName');
 
   console.log(id);
-  projectInfo.innerHTML = '';
+  //projectInfo.innerHTML = '';
 
   var query = database.ref('projects/'+id);
 
+    var _pName = document.getElementById("pName");
+    var _pId = document.getElementById("pId");
+    var _pDesc = document.getElementById("pDesc");
+    var _pStartDate = document.getElementById("pStartDate");
+    var _pEndDate = document.getElementById("pEndDate");
+    var _pBudget = document.getElementById("pBudget");
+    var _pExpense = document.getElementById("pExpense");
+    var _pSisa = document.getElementById("pSisa");
 
   sumPengeluaran(pId);
   sumBalance(pId);
@@ -56,18 +74,28 @@ function fetchProjectData(id){
     desc = snapshot.val().description;
     status = snapshot.val().status;
     //var team = projects[i].team;
-      dateAdded = new Date(snapshot.val().dateAdded);
+      dateAdded = new Date(snapshot.val().dateAdded)
+      dateEndded = "-";
     budget = snapshot.val().budget;
     pengeluaran = sumBudget;
     sisa = budget - pengeluaran;
-
 
 
   console.log(snapshot.val().budget);
   }).then(()=>{
       projectName.innerText = name;
 
-  projectInfo.innerHTML =   '<div>Project ID   : '+id_+' </div>'+
+          _pName.innerText = name;
+          _pId.innerText = id_;
+          _pDesc.innerText = desc;
+          _pStartDate.innerText = dateAdded;
+          _pEndDate.innerText = dateEndded;
+          _pBudget.innerText = budget;
+          _pExpense.innerText = pengeluaran;
+          _pSisa.innerText = sisa;
+
+
+  //projectInfo.innerHTML =   '<div>Project ID   : '+id_+' </div>'+
                             '<div>Status   : '+status+' </div>'+
                             '<div>Description : '+desc+' </div>'+
                             '<div>Date Added : '+dateAdded+' </div>'+

@@ -9,8 +9,10 @@
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
 
 </head>
-    <body onload="fetchAllData()" style="align-items: center; align-content: center;">
-
+    <body onload="loadProjectReport()" style="align-items: center; align-content: center;">
+    <div class="ui active inverted dimmer" id="projectLoader">
+        <div class="ui text loader">Loading</div>
+    </div>
     <div align="center">
 
     <table width="800" style="width: 800px">
@@ -41,7 +43,7 @@
             </tr>
             <tr>
                 <td><strong>Nama Project : </strong></td>
-                <td id="namaProject">Profile Laopan</td>
+                <td id="pName">Nama Project</td>
             </tr>
             <tr>
                 <td width="100"><strong>Unit Produksi : </strong></td>
@@ -57,31 +59,31 @@
                 <tbody>
                 <tr>
                     <td><strong>Project ID  </strong></td>
-                    <td >Profile Laopan</td>
+                    <td id="pId" >Profile Laopan</td>
                 </tr>
                 <tr>
                     <td width="100"><strong>Description  </strong></td>
-                    <td>Locomotive Production</td>
+                    <td id="pDesc">Locomotive Production</td>
                 </tr>
                 <tr>
                     <td width="100"><strong>Start Date  </strong></td>
-                    <td>Locomotive Production</td>
+                    <td id="pStartDate">Locomotive Production</td>
                 </tr>
                 <tr>
                     <td width="100"><strong>End Date  </strong></td>
-                    <td>Locomotive Production</td>
+                    <td id="pEndDate">Locomotive Production</td>
                 </tr>
                 <tr>
                     <td width="100"><strong>Budget   </strong></td>
-                    <td>Locomotive Production</td>
+                    <td id="pBudget">Locomotive Production</td>
                 </tr>
                 <tr>
                     <td width="100"><strong>Expense  </strong></td>
-                    <td>Locomotive Production</td>
+                    <td id="pExpense">Locomotive Production</td>
                 </tr>
                 <tr>
                     <td width="100"><strong>Sisa  </strong></td>
-                    <td>Locomotive Production</td>
+                    <td id="pSisa">Locomotive Production</td>
                 </tr>
                 </tbody>
             </table>

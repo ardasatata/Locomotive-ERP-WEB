@@ -33,7 +33,11 @@ function fetchProjects () {
       }
 
       //console.log(project);
-      projects.push(project);
+
+        if (project.status!="Done") {
+            projects.push(project);
+        }
+
       //console.log(projects);
       });
     }).then(()=>{

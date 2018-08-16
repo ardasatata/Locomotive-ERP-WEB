@@ -1,14 +1,38 @@
 var database = firebase.database();
 var pId = getURLParameter('id');
 
-var _id,name,desc,status,budget,pengeluaran,dateAdded,dateEndded,sisa;
+var _id,name,desc,status,budget,pengeluaran,dateAdded,dateEndded,_sisa;
 
 var pSchedules = [];
 var pBudgets = [];
 
+var _pName = document.getElementById("pName");
+var _pId = document.getElementById("pId");
+var _pDesc = document.getElementById("pDesc");
+var _pStartDate = document.getElementById("pStartDate");
+var _pEndDate = document.getElementById("pEndDate");
+var _pBudget = document.getElementById("pBudget");
+var _pExpense = document.getElementById("pExpense");
+var _pSisa = document.getElementById("pSisa");
+
+var _budget = 0;
+
 function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)')
         .exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+}
+
+function loadProjectReport(){
+    fetchAllData();
+}
+
+function loadingDoneAndPrint(){ //matikan loading muter2
+    var projectTable = document.getElementById("projectLoader");
+    var currentClass = projectTable.className;
+
+    projectTable.className = "ui inverted dimmer";
+
+    window.print(); //print page
 }
 
 function fetchAllData() {
@@ -28,12 +52,18 @@ function fetchAllData() {
         status = snapshot.val().status;
         //var team = projects[i].team;
         dateAdded = new Date(snapshot.val().dateAdded);
-        dateEndded = "TBA";
+        dateEndded = "-";
         budget = snapshot.val().budget;
-        pengeluaran = sumBudget;
-        sisa = budget - pengeluaran;
 
         console.log(snapshot.val().budget);
+    }).then(()=>{
+        _pName.innerText = name;
+        _pId.innerText = _id;
+        _pDesc.innerText = desc;
+        _pStartDate.innerText = dateAdded;
+        _pEndDate.innerText = dateEndded;
+        _pBudget.innerText = budget;
+
     });
 
     //Budget Data
@@ -87,6 +117,8 @@ function fetchAllData() {
             '<td><h4>TOTAL</h4></td>'+
             '<td style="text-align: right"><h4>IDR  '+total+',00</h4></td>'+
             '</tr>';
+
+            pengeluaran = total;  //hitung pengeluaran disini !!!
     }
     );
 
@@ -124,12 +156,6 @@ function fetchAllData() {
             var desc = pSchedules[i].desc;
             var status = pSchedules[i].status;
 
-            var tdClass = "";
-
-            if (status){
-                tdClass = "positive";
-            }
-
             //console.log("loaded"+i+budgets[i].id);
 
             var doneSchedule = "\"doneSchedule(\'"+idSchedule+"\')\"";
@@ -138,7 +164,7 @@ function fetchAllData() {
             //console.log(doneSchedule);
 
             sTime.innerHTML +=
-                '<tr class= "'+tdClass+'">'+
+                '<tr>'+
                 '<td>'+(i+1)+'</td>'+
                 '<td>'+date+'</td>'+
                 '<td>'+time+'</td>'+
@@ -146,6 +172,11 @@ function fetchAllData() {
                 '</td>'+
                 '</tr>';
         }
+    }).finally(()=>{
+        _sisa = budget - pengeluaran;
+        _pExpense.innerText = pengeluaran;
+        _pSisa.innerText = _sisa;
+        loadingDoneAndPrint();
     });
 
 }
