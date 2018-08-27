@@ -25,7 +25,7 @@ function fetchBudgetData(){  // ambil semua data budget
     var budgets = [];
 
     query.once('value').then(function(snapshot) {
-      snapshot.forEach(function (childSnapshot) {
+      snapshot.forEach(function (childSnapshot){
         // console.log(childSnapshot.val().amount);
         // console.log(childSnapshot.val().desc);
 

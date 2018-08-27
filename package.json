@@ -19,5 +19,8 @@
     "semantic-ui": "^2.3.3",
     "semantic-ui-calendar": "0.0.8"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "scripts": {
+    "start": "node main.js"
+  }
 }
