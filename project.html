@@ -154,6 +154,20 @@
               <input type="text" placeholder="Masukan nominal pengeluaran" id="pInputExpense">
           </div>
           <div class="field">
+              <label>Expense Type</label>
+              <div class="ui selection dropdown">
+                  <input id="pInputExpenseType">
+                  <i class="dropdown icon"></i>
+                  <div class="default text"></div>
+                  <div class="menu">
+                      <div class="item" data-value="Direct Rent">Direct Rent</div>
+                      <div class="item" data-value="Direct Labor">Direct Labor</div>
+                      <div class="item" data-value="FOH">FOH</div>
+                      <div class="item" data-value="Other">Other</div>
+                  </div>
+              </div>
+          </div>
+          <div class="field">
               <label>Deskripsi Pengeluaran</label>
               <textarea rows="3" id="pInputExpenseDesc"></textarea>
           </div>
@@ -167,6 +181,7 @@
           <tr>
               <th>No</th>
               <th>Expense Desc</th>
+              <th>Expense Type</th>
               <th style="text-align: center">Amount</th>
               <th></th>
           </tr>
@@ -189,7 +204,6 @@
     <script src="firebase_config.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-database.js"></script>
     <script src="http://chancejs.com/chance.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
     <script src="budget.js"></script>
     <script src="project.js"></script>
     <script src="schedule.js"></script>

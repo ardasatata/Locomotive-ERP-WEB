@@ -139,25 +139,31 @@ function saveProject(e) { //add project
   var projectStatus = "Belum Take";
   //var projectTeam = document.getElementById('projectTeamInput').value;
   var projectBudget = document.getElementById('projectBudgetInput').value;
-  var project = {
-      id: projectId,
-      dateAdded:projectDateAdded.toDateString(),
-      name: projectName,
-      description: projectDesc,
-      status: projectStatus,
-      budget: projectBudget
+
+  if (projectName == '' || projectDesc =='' || projectBudget == '') {
+      alert("Mohon form diisi semua");
+  }else{
+      var project = {
+          id: projectId,
+          dateAdded:projectDateAdded.toDateString(),
+          name: projectName,
+          description: projectDesc,
+          status: projectStatus,
+          budget: projectBudget
+      }
+
+
+      var query = firebase.database().ref('projects/' + projectId).set(project);
+
+      console.log(query);
+
+      document.getElementById('projectInputForm').reset();
+
+      fetchProjects();
+
+      window.location.replace("/project_list.html");
   }
-
-  var query = firebase.database().ref('projects/' + projectId).set(project);
-
-  console.log(query);
-
-  document.getElementById('projectInputForm').reset();
-
-  fetchProjects();
-
-  window.location.replace("/project_list.html");
-
+e.preventDefault();
 }
 
 function deleteProject (projectId) {

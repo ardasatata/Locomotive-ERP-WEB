@@ -45,7 +45,7 @@ function fetchBudgetData(){  // ambil semua data budget
         for (var i = 0; i < budgets.length; i++) {
             var idBudget = budgets[i].id;
             var desc = budgets[i].description;
-            var amount = budgets[i].amount;
+            var amount = parseInt(budgets[i].amount);
 
             total += amount;
 
@@ -59,6 +59,7 @@ function fetchBudgetData(){  // ambil semua data budget
                 '<tr>'+
                 '<td>'+(i+1)+'</td>'+
                 '<td>'+desc+'</td>'+
+                '<td>'+'Other'+'</td>'+
                 '<td style="text-align: right">'+amount+'</td>'+
                 '<td class="selectable negative" style="text-align: center">'+
                 '<i class="icon close" onclick='+budgetId+'></i>'+
@@ -68,6 +69,7 @@ function fetchBudgetData(){  // ambil semua data budget
 
         pBudgetBody.innerHTML +=
             '<tr>'+
+            '<td></td>'+
             '<td></td>'+
             '<td><h4>TOTAL</h4></td>'+
             '<td style="text-align: right"><h4>IDR  '+total+',00</h4></td>'+
@@ -154,7 +156,7 @@ function sumPengeluaran(idProject){
             var childData = childSnapshot.val();
             //console.log(key+" "+childData.amount);
 
-            sum += childData.amount;
+            sum += parseInt(childData.amount);
         })
     }).then(()=>{
         sumBudget = sum;

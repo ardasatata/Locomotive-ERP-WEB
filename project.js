@@ -20,6 +20,9 @@ function Load(){
   fetchBudgetData();
   fetchScheduleData();
 
+    $('.ui.dropdown')
+        .dropdown('set selected',"Other");
+
   //var pReportButton = document.getElementById('projectReportButton');
     $("#projectReportButton").click(function () {
         window.location.href = "/ProjectReport.html?id="+id_;
@@ -89,7 +92,7 @@ function fetchProjectData(id){
     desc = snapshot.val().description;
     status = snapshot.val().status;
     //var team = projects[i].team;
-      dateAdded = new Date(snapshot.val().dateAdded)
+      dateAdded = snapshot.val().dateAdded;
       dateEndded = snapshot.val().dateEndded;
     budget = snapshot.val().budget;
     pengeluaran = sumBudget;
