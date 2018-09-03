@@ -39,10 +39,9 @@ function fetchAllData() {
 
     //project Data
 
-    var queryProject = database.ref('projects/'+pId);
+    var PENGELUARAN;
 
-    sumPengeluaran(pId);
-    sumBalance(pId);
+    var queryProject = database.ref('projects/'+pId);
 
     queryProject.once('value').then(function(snapshot) {
 
@@ -51,7 +50,7 @@ function fetchAllData() {
         desc = snapshot.val().description;
         status = snapshot.val().status;
         //var team = projects[i].team;
-        dateAdded = new Date(snapshot.val().dateAdded);
+        dateAdded = snapshot.val().dateAdded;
         dateEndded = "-";
         budget = snapshot.val().budget;
 
@@ -68,7 +67,7 @@ function fetchAllData() {
 
     //Budget Data
 
-    var queryBudget = database.ref('budgets/'+pId);
+    var queryBudget = database.ref('budgets/'+pId).orderByChild('type');
 
     var pBudgetBody = document.getElementById('pBudgetBody');
     //console.log(id);
@@ -82,6 +81,7 @@ function fetchAllData() {
             var budget = {
                 id: childSnapshot.key,
                 description: childSnapshot.val().desc,
+                type:childSnapshot.val().type,
                 amount: childSnapshot.val().amount
             }
 
@@ -92,14 +92,39 @@ function fetchAllData() {
 
         var total = 0;
 
+        var bDR=0,bDL=0,bFOH=0,bOther=0;
+
+        for (var i = 0; i < pBudgets.length; i++) {
+            switch (pBudgets[i].type) {
+                case 'Direct Rent':
+                    bDR += parseInt(pBudgets[i].amount);
+                    break;
+                case 'Direct Labor':
+                    bDL += parseInt(pBudgets[i].amount);
+                    break;
+                case 'FOH':
+                    bFOH += parseInt(pBudgets[i].amount);
+                    break;
+                case 'Other':
+                    bOther += parseInt(pBudgets[i].amount);
+                    break;
+            }
+        }
+
+        console.log(bDR+" "+bDL+" "+bFOH+" "+bOther)
+
+
         for (var i = 0; i < pBudgets.length; i++) {
             var idBudget = pBudgets[i].id;
             var desc = pBudgets[i].description;
-            var amount = pBudgets[i].amount;
+            var type = pBudgets[i].type;
+            var amount = parseInt(pBudgets[i].amount);
 
             total += amount;
 
             //console.log("loaded"+i+budgets[i].id);
+
+            var budgetId = "\"removeBudget(\'"+idBudget+"\')\"";
 
             //console.log(budgetId);
 
@@ -107,6 +132,7 @@ function fetchAllData() {
                 '<tr>'+
                 '<td>'+(i+1)+'</td>'+
                 '<td>'+desc+'</td>'+
+                '<td>'+type+'</td>'+
                 '<td style="text-align: right">'+amount+'</td>'+
                 '</tr>';
         }
@@ -114,15 +140,46 @@ function fetchAllData() {
         pBudgetBody.innerHTML +=
             '<tr>'+
             '<td></td>'+
-            '<td><h4>TOTAL</h4></td>'+
+            '<td><h4>Direct Rent</h4></td>'+
+            '<td></td>'+
+            '<td style="text-align: right"><h4>IDR  '+bDR+',00</h4></td>'+
+            '</tr>';
+
+        pBudgetBody.innerHTML +=
+            '<tr>'+
+            '<td></td>'+
+            '<td><h4>Direct Labor</h4></td>'+
+            '<td></td>'+
+            '<td style="text-align: right"><h4>IDR  '+bDL+',00</h4></td>'+
+            '</tr>';
+
+        pBudgetBody.innerHTML +=
+            '<tr>'+
+            '<td></td>'+
+            '<td><h4>FOH</h4></td>'+
+            '<td></td>'+
+            '<td style="text-align: right"><h4>IDR  '+bFOH+',00</h4></td>'+
+            '</tr>';
+
+        pBudgetBody.innerHTML +=
+            '<tr>'+
+            '<td></td>'+
+            '<td><h4>Other</h4></td>'+
+            '<td></td>'+
+            '<td style="text-align: right"><h4>IDR  '+bOther+',00</h4></td>'+
+            '</tr>';
+
+        pBudgetBody.innerHTML +=
+            '<tr>'+
+            '<td></td>'+
+            '<td><h4>GRAND TOTAL</h4></td>'+
+            '<td></td>'+
             '<td style="text-align: right"><h4>IDR  '+total+',00</h4></td>'+
             '</tr>';
 
-            pengeluaran = total;  //hitung pengeluaran disini !!!
-    }
-    );
+        PENGELUARAN = total;
+    });
 
-    console.log('test Schedule');
 
     var querySchedules = database.ref('schedules/'+pId);
 
@@ -173,8 +230,8 @@ function fetchAllData() {
                 '</tr>';
         }
     }).finally(()=>{
-        _sisa = budget - pengeluaran;
-        _pExpense.innerText = pengeluaran;
+        _sisa = budget - PENGELUARAN;
+        _pExpense.innerText = PENGELUARAN;
         _pSisa.innerText = _sisa;
         loadingDoneAndPrint();
     });
