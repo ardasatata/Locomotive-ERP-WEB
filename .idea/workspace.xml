@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="70d14787-acc5-4506-b59d-69ba185558e9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectReport.html" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectReport.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/budget.js" beforeDir="false" afterPath="$PROJECT_DIR$/budget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectReport.js" beforeDir="false" afterPath="$PROJECT_DIR$/projectReport.js" afterDir="false" />
-    </list>
+    <list default="true" id="70d14787-acc5-4506-b59d-69ba185558e9" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -104,7 +99,7 @@
     <session id="570461430">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.opened" value="2" />
@@ -347,9 +342,11 @@
       <path value="$PROJECT_DIR$/semantic/tasks/config/admin/templates/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
+  <component name="ProjectFrameBounds">
+    <option name="x" value="46" />
+    <option name="y" value="77" />
     <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="height" value="1010" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -432,16 +429,15 @@
       <workItem from="1535303928298" duration="648000" />
       <workItem from="1535345001469" duration="3441000" />
       <workItem from="1535900546652" duration="2553000" />
-      <workItem from="1535954906852" duration="3453000" />
+      <workItem from="1535954906852" duration="4091000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86209000" />
+    <option name="totallyTimeSpent" value="86847000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
+    <frame x="46" y="77" width="1920" height="1010" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17430227" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -457,7 +453,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2990099" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32897604" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
