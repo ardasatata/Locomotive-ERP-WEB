@@ -51,7 +51,7 @@ function fetchAllData() {
         status = snapshot.val().status;
         //var team = projects[i].team;
         dateAdded = snapshot.val().dateAdded;
-        dateEndded = "-";
+        dateEndded = snapshot.val().dateEndded;
         budget = snapshot.val().budget;
 
         console.log(snapshot.val().budget);
@@ -180,6 +180,45 @@ function fetchAllData() {
         PENGELUARAN = total;
     });
 
+    var attachmentsRef = firebase.database().ref("attachments/"+pId);
+
+    var sAttachment = document.getElementById('pAttachmentBody');
+
+    sAttachment.innerHTML = '';
+
+    var attachments = [];
+
+    console.log(attachmentsRef);
+
+    attachmentsRef.once('value').then(function(snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+
+            var attachment = {
+                id: childSnapshot.key,
+                url: childSnapshot.val(),
+            }
+
+            console.log(attachment);
+            attachments.push(attachment);
+        })
+    }).then(()=>{
+
+        for (var i = 0; i < attachments.length; i++) {
+            var attachmentId = attachments[i].id;
+            var attachmentURL = attachments[i].url;
+
+            var imageURL = "\""+attachmentURL+"\"";
+
+            sAttachment.innerHTML +=
+                '<tr>'+
+                '<td>'+(i+1)+'</td>'+
+                '<td>'+'<img src='+imageURL+' height="384" style="">'+'</td>'+
+                '</tr>'
+            ;
+
+        }
+    });
+
 
     var querySchedules = database.ref('schedules/'+pId);
 
@@ -233,7 +272,7 @@ function fetchAllData() {
         _sisa = budget - PENGELUARAN;
         _pExpense.innerText = PENGELUARAN;
         _pSisa.innerText = _sisa;
-        loadingDoneAndPrint();
+        setTimeout(function() { loadingDoneAndPrint(); }, 2000);
     });
 
 }

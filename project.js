@@ -1,5 +1,6 @@
 var database = firebase.database();
 var pId = getURLParameter('id');
+var attachmentsRef = firebase.database().ref("attachments/"+pId);
 
 var id_,name,desc,status,budget,pengeluaran,dateAdded,sisa;
 
@@ -16,9 +17,11 @@ function Load(){
         type: 'time',
         ampm: false,
     });
+
   fetchProjectData(getURLParameter('id'));
   fetchBudgetData();
   fetchScheduleData();
+  fetchAttachmentData();
 
     $('.ui.dropdown')
         .dropdown('set selected',"Other");
@@ -112,16 +115,6 @@ function fetchProjectData(id){
           _pExpense.innerText = pengeluaran;
           _pSisa.innerText = sisa;
 
-
-  // //projectInfo.innerHTML =   '<div>Project ID   : '+id_+' </div>'+
-  //                           '<div>Status   : '+status+' </div>'+
-  //                           '<div>Description : '+desc+' </div>'+
-  //                           '<div>Date Added : '+dateAdded+' </div>'+
-  //                           '<div>End Date : - </div>'+
-  //                           '<div>Budget : '+budget+' </div>'+
-  //                           '<div id="pExpense">Expense : '+pengeluaran+' </div>'+
-  //                           '<div id="pSisa">Sisa : '+sisa+' </div>';
-
                           }
                         ).finally(()=>{
       projectTableLoading();
@@ -131,6 +124,61 @@ function fetchProjectData(id){
       console.log(projectEditButton);
 
   });
+}
+
+function removeAttachment(idAttachment){ //remove budget component jangan lupa pake ""
+    attachmentsRef.child(idAttachment).remove();
+    fetchAttachmentData();
+
+}
+
+function fetchAttachmentData(){
+
+    var sAttachment = document.getElementById('pAttachmentBody');
+
+    sAttachment.innerHTML = '';
+
+    var attachments = [];
+
+    console.log(attachmentsRef);
+
+    attachmentsRef.once('value').then(function(snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+
+            var attachment = {
+                id: childSnapshot.key,
+                url: childSnapshot.val(),
+            }
+
+            console.log(attachment);
+            attachments.push(attachment);
+        })
+    }).then(()=>{
+
+        for (var i = 0; i < attachments.length; i++) {
+            var attachmentId = attachments[i].id;
+            var attachmentURL = attachments[i].url;
+
+
+
+            //console.log("loaded"+i+budgets[i].id);
+
+            var removeAttachment = "\"removeAttachment(\'"+attachmentId+"\')\"";
+            var imageURL = "\""+attachmentURL+"\"";
+
+            sAttachment.innerHTML +=
+                '<tr>'+
+                '<td>'+(i+1)+'</td>'+
+                '<td>'+'<img src='+imageURL+' height="256" style="">'+'</td>'+
+                '<td class="selectable negative" style="text-align: center">'+
+                '<i class="icon close" onclick='+removeAttachment+'></i>'+
+                '</td>'+
+                '</tr>'
+            ;
+
+        }
+    });
+
 }
 
 

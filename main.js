@@ -66,8 +66,6 @@ function fetchProjects () {
 
   projectsList.innerHTML = '';
 
-  //console.log(projects[0].id);
-
 }
 
 function fetchProjectsArchive () {
